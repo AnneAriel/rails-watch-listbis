@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  # pas nécessaire
+
+  # pas nécessaire -> dans lists_controller
     # def new
     #   @review = Review.new
     # end
@@ -11,17 +12,23 @@ class ReviewsController < ApplicationController
     @list = List.find(params[:list_id])
     # on associe la review à la liste
     @review.list = @list
+    # si on peut sauvegarder la review
     if @review.save
+      # on redirige vers la liste
       redirect_to list_path(@list)
     else
-      # @bookmark = Bookmark.new
+      # sinon on affiche la liste
+      @bookmark = Bookmark.new
       render 'lists/show', status: :unprocessable_entity
     end
   end
 
   def destroy
+    # on va chercher la review
     @review = Review.find(params[:id])
+    # on va détruire la review
     @review.destroy
+    # on redirige vers la liste
     redirect_to list_path(@review.list), status: :see_other
   end
 end
@@ -29,5 +36,6 @@ end
 private
 
 def review_params
+  # on va chercher les params de la review
   params.require(:review).permit(:comment, :rating)
 end
