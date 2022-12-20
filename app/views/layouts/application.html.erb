@@ -13,5 +13,15 @@
   <body>
     <%= render 'shared/navbar' %>
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        var typed = new Typed(".mov",{
+        strings: [, "any kind of movies"] ,
+        typeSpeed: 100,
+        backSpeed: 100,
+        loop: true
+
+        })
+    </script>
   </body>
 </html>
